@@ -33,7 +33,7 @@ class SessionStorage extends BaseDataStorage
         }
 
         $name = $this->constructSessionVariableName($key);
-        $_SESSION[$name] = $value;
+        $_SESSION[$name] = serialize($value);
     }
 
     /**
@@ -47,7 +47,15 @@ class SessionStorage extends BaseDataStorage
 
         $name = $this->constructSessionVariableName($key);
 
-        return isset($_SESSION[$name]) ? $_SESSION[$name] : $default;
+        if (isset($_SESSION[$name])) {
+            if (false !== $result = @unserialize($_SESSION[$name])) {
+                return $result;
+            }
+
+            return $_SESSION[$name];
+        }
+
+        return $default;
     }
 
     /**

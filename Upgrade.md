@@ -7,10 +7,11 @@
 
 ## BC breaks
 
-There are a few minor BC breaks. We removed the functions below: 
+There are a few minor BC breaks. 
 
 * `LinkedIn::getUserId`, use `LinkedIn::getUser` instead
 * `AccessToken::constructFromJson`, Use the constructor instead. 
+* We are now serializing the data in the session storage. Old session will still work.
 
 # Upgrade from 0.4 to 0.5
 

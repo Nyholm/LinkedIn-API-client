@@ -10,12 +10,12 @@ class AccessToken
     /**
      * @var null|string token
      */
-    private $token;
+    protected $token;
 
     /**
      * @var \DateTime expiresAt
      */
-    private $expiresAt;
+    protected $expiresAt;
 
     /**
      * @param string        $token
@@ -40,6 +40,14 @@ class AccessToken
     public function __toString()
     {
         return $this->token ?: '';
+    }
+
+    /**
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array('token', 'expiresAt');
     }
 
     /**
